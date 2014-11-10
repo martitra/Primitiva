@@ -55,9 +55,9 @@ public class MainActivity extends Activity {
 		prim = new Primitiva();
 		resultado = prim.generarNumeros();
 		for(int i=0;i<resultado.length;i++){
-			 cadena += resultado[i]+", " ;
+			 cadena += resultado[i]+(", ") ;//no va
 		}
-		resul.setText(cadena);
+		resul.setText(cadena);//concat concatenar cosas para las comas
 		
 		SharedPreferences prefs =
 			     getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
