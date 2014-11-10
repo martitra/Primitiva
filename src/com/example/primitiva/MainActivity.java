@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putString("numeros", resul.getText().toString());
 		editor.commit();
-		//finish();
+		//finish(); 
 		
 		
 		//modificar esto no puede estar en oncreate
