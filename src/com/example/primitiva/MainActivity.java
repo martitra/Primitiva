@@ -24,6 +24,8 @@ public class MainActivity extends Activity {
 		
 		resul = (TextView)findViewById(R.id.numeros);
 		
+		SharedPreferences prefe=getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
+        resul.setText(prefe.getString("numeros","")); 
 		
 	}
 
@@ -60,16 +62,18 @@ public class MainActivity extends Activity {
 		SharedPreferences prefs =
 			     getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
-		editor.putString("numeros", cadena);
+		editor.putString("numeros", resul.getText().toString());
 		editor.commit();
+		//finish();
+		
 		
 		//modificar esto no puede estar en oncreate
-		if(resul!= null){
-			SharedPreferences prefs =
-				     getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-			int i  =  prefs.getInt("numeros",0);
-			resul.setText(i);
-		}
+		//if(resul!= null){
+			//SharedPreferences prefs =
+				     //getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+			//int i  =  prefs.getInt("numeros",0);
+			//resul.setText(i);
+		//}
 	
 	}
 }
