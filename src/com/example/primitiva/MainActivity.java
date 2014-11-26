@@ -20,12 +20,14 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
+		setContentView(R.layout.activity_main);		
 		resul = (TextView)findViewById(R.id.numeros);
+		
+		//numerosGanadores(null);
 		
 		SharedPreferences prefe=getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
         resul.setText(prefe.getString("numeros","")); 
+        
 		
 	}
 
