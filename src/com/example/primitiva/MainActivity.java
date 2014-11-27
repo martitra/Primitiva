@@ -1,6 +1,8 @@
 package com.example.primitiva;
 
 //import android.support.v7.app.ActionBarActivity;
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,25 +12,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
-	
-	private Primitiva prim;
+	// hacer una instancia de primitiva(clase) pero no es actividad
+	// poner arraylist de enteros - generarcombinacion
+
 	TextView resul;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);		
-		resul = (TextView)findViewById(R.id.numeros);
-		
-		//numerosGanadores(null);
-		
-		SharedPreferences prefe=getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
-        resul.setText(prefe.getString("numeros","")); 
-        
-		
+		setContentView(R.layout.activity_main);
+		resul = (TextView) findViewById(R.id.numeros);
+
+		// numerosGanadores(null);
+
+		SharedPreferences prefe = getSharedPreferences("MisPreferencias",
+				Context.MODE_PRIVATE);
+		resul.setText(prefe.getString("numeros", ""));
+
 	}
 
 	@Override
@@ -49,33 +52,33 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void numerosGanadores(View v){	
+
+	public void numerosGanadores(View v) {
+		
 		int[] resultado;
 		String cadena;
-		cadena ="";
-		prim = new Primitiva();
-		resultado = prim.generarNumeros();
-		for(int i=0;i<resultado.length;i++){
-			 cadena += resultado[i]+(", ") ;//no va
+		cadena = "";
+		resultado = Primitiva.generarCombinacion();
+		Arrays.sort(resultado);//ordenar de menor a mayor
+		for (int i = 0; i < resultado.length; i++) {
+			cadena += resultado[i] + (", ");
 		}
-		resul.setText(cadena);//concat concatenar cosas para las comas
-		
-		SharedPreferences prefs =
-			     getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+		String ncadena = cadena.substring(0, cadena.length() - 2);// sacar coma
+																	// del final
+		resul.setText(ncadena);
+
+	}
+
+	public void guardarNumeros(View v) {
+
+		SharedPreferences prefs = getSharedPreferences("MisPreferencias",
+				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putString("numeros", resul.getText().toString());
 		editor.commit();
-		//finish(); 
-		
-		
-		//modificar esto no puede estar en oncreate
-		//if(resul!= null){
-			//SharedPreferences prefs =
-				     //getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-			//int i  =  prefs.getInt("numeros",0);
-			//resul.setText(i);
-		//}
-	
+
+		Toast.makeText(getBaseContext(), "Números Guardados", Toast.LENGTH_LONG)
+				.show();
 	}
 }

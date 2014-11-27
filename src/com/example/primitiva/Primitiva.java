@@ -1,39 +1,45 @@
 package com.example.primitiva;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
+public class Primitiva {
 
-public class Primitiva extends Activity {
+	static int tam = 6;
+	static int min = 1;
+	static int max = 49;
 
-	int[] numeros = new int[6];
-	int primitiva;
-	int b;
+	public static int[] generarCombinacion() {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
+		// generar combinacion() array
+		// generar numeros ()int
+		// existe nuevos (array)
 
+		int[] numeros = new int[tam];
+		int i = 0;
+
+		// cambiar esto para no for, sino para que si se repite no i++ y si no
+		// que se quede hasta que no haya repetidos
+		while (i < tam) { 
+			numeros[i] = generarNumeros();
+			numerosIguales(numeros, i);
+
+		}
+		return numeros;
 	}
 
-	public int[] generarNumeros() {
-		// TextView vernumeros = (TextView)findViewById(R.id.numeros);
+	public static int generarNumeros() {
+		int numero = min + (int) (Math.random() * max);
+		return numero;
+	}
 
-		for (int i = 0; i < 6; i++) {
-			numeros[i] = 1 + (int) (Math.random() * 49);
-			while (b < i) {
+	public static int[] numerosIguales(int[] numeros, int i) {
 
-				if (numeros[i] == numeros[b]) {
-					numeros[i] = 1 + (int) (Math.random() * 49);
-					b = 0;
-				} else {
-					b++;
-				}
-			}
+		int b = 0;
+		if (numeros[i] == numeros[b]) {
+			numeros[i] = generarNumeros();
 			b = 0;
+		} else {
+			b++;
 		}
+
 		return numeros;
 	}
 }
